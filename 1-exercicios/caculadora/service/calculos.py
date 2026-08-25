@@ -3,16 +3,16 @@ import math
 class Calculos:
     
     def adicao(numA, numB):
-        return numA + numB
+        return print(f"{numA + numB}")
     
     def subtracao(numA, numB):
-        return numA + numB
+        return print(f"{numA - numB}")
     
     def multiplicacao(numA, numB):
-        return numA * numB
+        return print(f"{numA * numB}")
     
-    def dicisao(numA, numB):
-        return numA / numB
+    def divisao(numA, numB):
+        return print(f"{numA / numB}")
     
     def raizQuadrada(numA):
-        return math.sqrt(numA) 
+        return print(f"{math.sqrt(numA)}")

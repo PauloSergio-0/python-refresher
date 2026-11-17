@@ -16,7 +16,7 @@ def faturamento(individual=False):
             faturamento += (item['quantidade'] * item['preco'])
             
         
-        print(f"Faturamento: {faturamento}")
+        print(f"Faturamento Total: R$ {round(float(faturamento),2)}")
     else:
         faturamentoIndividual = 0
         for item in vendas:
@@ -30,26 +30,26 @@ def quantidade():
     for item in vendas:
         qtd += item['quantidade']
     
-    print(f"Quantidade: {qtd}")
+    print(f"Quantide de itens vendidos: {qtd}")
 
 
 def produtoMaisVendido():
 
     maisVendido = sorted(vendas,key= lambda v: v["quantidade"], reverse=True)
     
-    print(maisVendido[0])
+    print(f"Produto mais vendido: {maisVendido[0]["produto"]}")
     
 def produtoMaiorFaturamento():
     maiorFaturamento = sorted(vendas,key= lambda v: (v["quantidade"] * v["preco"]), reverse=True)
     
-    print(maiorFaturamento[0])
+    print(f"Maior faturamento por produto: {maiorFaturamento[0]["quantidade"] * maiorFaturamento[0]["preco"]}")
     
 def cincoVendas():
     for i in vendas:
         if i["quantidade"]>5:
             print(i)
 
-def faturamentoCategoria( str = True):
+def faturamentoCategoria(opcao = 1):
     categoria = []
 
     for i in vendas:
@@ -65,16 +65,15 @@ def faturamentoCategoria( str = True):
         if not encontrada:
             categoria.append({"categoria": i["categoria"], "faturamento": (i['quantidade'] * i['preco'])})
                 
-    if str:
+    if opcao == 1:
         for item in categoria:
-            print(item)
-    return categoria
+            print(f"Categoria: {item['categoria']} Faturamento: {item["faturamento"]}")
             
-            
-# print(sorted(faturamentoCategoria(False), key= lambda c : c["faturamento"], reverse=True)[0])
+    elif opcao == 2: # todas as categorias em listra
+        print(sorted(faturamentoCategoria(False), key= lambda c : c["faturamento"], reverse=True)[0])
 
 def percentualCategoria():
-    percentual = faturamentoCategoria(False)
+    percentual = faturamentoCategoria(1)
     
     faturamentoTotal = 0
     
@@ -84,7 +83,22 @@ def percentualCategoria():
     for p in percentual:
         print(f"Categoria: {p["categoria"]} Faturamento: {p["faturamento"]} Percentual: {(round(p["faturamento"]/faturamentoTotal ,2))* 100}%")
         
-percentualCategoria()
 
 
+def relatorio():
+    print(("="*5)+" RELATÓRIO DE VENDAS "+("="*5))
+    print("\n")
+    faturamento()
+    quantidade()
+    print("\n")
+    
+    produtoMaisVendido()
+    produtoMaiorFaturamento()
 
+    print("\n")
+    print(("="*5)+" Categorias "+("="*5))
+    
+    faturamentoCategoria(1)
+    print("\n")
+    
+relatorio()

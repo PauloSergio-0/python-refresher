@@ -48,11 +48,43 @@ def cincoVendas():
     for i in vendas:
         if i["quantidade"]>5:
             print(i)
-# faturamento()
-# faturamento(True)
-# quantidade()
-    
-# produtoMaisVendido()
-# produtoMaiorFaturamento()
 
-cincoVendas()
+def faturamentoCategoria( str = True):
+    categoria = []
+
+    for i in vendas:
+        
+        encontrada = False
+        for c in categoria:
+            
+            if i["categoria"] == c["categoria"]:
+                c["faturamento"] += (i['quantidade'] * i['preco'])
+                encontrada = True
+                break
+                
+        if not encontrada:
+            categoria.append({"categoria": i["categoria"], "faturamento": (i['quantidade'] * i['preco'])})
+                
+    if str:
+        for item in categoria:
+            print(item)
+    return categoria
+            
+            
+# print(sorted(faturamentoCategoria(False), key= lambda c : c["faturamento"], reverse=True)[0])
+
+def percentualCategoria():
+    percentual = faturamentoCategoria(False)
+    
+    faturamentoTotal = 0
+    
+    for p in percentual:
+        faturamentoTotal += p["faturamento"]
+    
+    for p in percentual:
+        print(f"Categoria: {p["categoria"]} Faturamento: {p["faturamento"]} Percentual: {(round(p["faturamento"]/faturamentoTotal ,2))* 100}%")
+        
+percentualCategoria()
+
+
+
